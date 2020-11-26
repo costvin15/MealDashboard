@@ -21,10 +21,10 @@ services:
     ports:
       - 5001:80
     environment:
-        PORT: 80
-        MONGOURL: mongodb://mongo/mealdashboard
-        SALT: 10
-        PRIVATEKEY: privatekey
+      PORT: 80
+      MONGOURL: mongodb://mongo/mealdashboard
+      SALT: 10
+      PRIVATEKEY: privatekey
   mongo:
     image: mongo
     container_name: mongodb
