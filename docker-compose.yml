@@ -5,7 +5,33 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     container_name: frontend
+    # restart: always
     expose:
       - "80"
     ports:
       - 5002:80
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    # restart: always
+    expose:
+      - "80"
+    ports:
+      - 5001:80
+    environment:
+        PORT: 80
+        MONGOURL: mongodb://mongo/mealdashboard
+        SALT: 10
+        PRIVATEKEY: privatekey
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: mealdashboard
+    volumes:
+      - mongodata:/data/db
+volumes:
+  mongodata:
