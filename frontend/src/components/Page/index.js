@@ -27,7 +27,6 @@ import {
 import {user} from '../../helpers'
 import {NavBar} from '../../components'
 import i18n from '../../lang'
-import {Provider} from './provider'
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -80,10 +79,6 @@ const Page = ({history, title = '', children = <></>}) => {
       path: '/guns',
     },
   ]
-
-  useEffect(() => {
-    Provider.validateSession()
-  }, [])
 
   return (
     <div className={classes.page}>
