@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom'
 
 import Login from './Login'
-import ForgotPassword from './ForgotPassword'
 import SignUp from './Signup'
 
 const AuthRoutes = ({match: {url}}) => (
