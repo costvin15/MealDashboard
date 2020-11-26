@@ -104,15 +104,6 @@ const Page = ({history, title = '', children = <></>}) => {
       </Container>
       <Drawer open={open} onClose={() => setOpen(false)}>
         <List>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>{user.getInfo().nome.charAt(0)}</Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={user.getInfo().nome}
-              secondary={user.getInfo().email} />
-          </ListItem>
-          <Divider />
           {drawerItems.map(({title, icon: Icon, path}) => (
             <ListItem button key={title} onClick={() => {
               history.push(path)
