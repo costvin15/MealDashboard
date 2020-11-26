@@ -9,8 +9,6 @@ import routes from "./routes";
 
 dotenv.config();
 
-console.log(process.env.MONGOURL)
-
 mongoose.connect(process.env.MONGOURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
