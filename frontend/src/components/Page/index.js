@@ -1,24 +1,17 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {
   makeStyles,
   Container,
   Typography,
   Drawer,
-  Avatar,
-  Divider,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  ListItemAvatar,
 } from '@material-ui/core'
 import {
   Home as HomeIcon,
-  Group as GroupIcon,
-  Timeline as TimelineIcon,
-  Assignment as AssignmentIcon,
   ExitToApp as ExitToAppIcon,
-  Security as SecurityIcon,
 } from '@material-ui/icons'
 import {
   withRouter
@@ -27,7 +20,6 @@ import {
 import {user} from '../../helpers'
 import {NavBar} from '../../components'
 import i18n from '../../lang'
-import {Provider} from './provider'
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -54,36 +46,7 @@ const Page = ({history, title = '', children = <></>}) => {
       icon: HomeIcon,
       path: '/',
     },
-    {
-      title: 'keepers',
-      icon: GroupIcon,
-      path: '/keepers'
-    },
-    {
-      title: 'timerecord',
-      icon: TimelineIcon,
-      path: '/toclockin',
-    },
-    {
-      title: 'simplifiedbulletin',
-      icon: AssignmentIcon,
-      path: '/simplifiedbulletin',
-    },
-    {
-      title: 'occurrencereport',
-      icon: AssignmentIcon,
-      path: '/occurrencereport',
-    },
-    {
-      title: 'guns',
-      icon: SecurityIcon,
-      path: '/guns',
-    },
   ]
-
-  useEffect(() => {
-    Provider.validateSession()
-  }, [])
 
   return (
     <div className={classes.page}>
@@ -104,15 +67,6 @@ const Page = ({history, title = '', children = <></>}) => {
       </Container>
       <Drawer open={open} onClose={() => setOpen(false)}>
         <List>
-          <ListItem>
-            <ListItemAvatar>
-              <Avatar>{user.getInfo().nome.charAt(0)}</Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={user.getInfo().nome}
-              secondary={user.getInfo().email} />
-          </ListItem>
-          <Divider />
           {drawerItems.map(({title, icon: Icon, path}) => (
             <ListItem button key={title} onClick={() => {
               history.push(path)

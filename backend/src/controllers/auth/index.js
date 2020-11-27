@@ -10,8 +10,6 @@ export default {
             let user;
             if (regex.test(params.email)) {
                 user = await User.findOne({ email: params.email });
-            } else {
-                user = await User.findOne({ username: params.email });
             }
 
             if (!user) {
@@ -44,15 +42,9 @@ export default {
                 return response.status(400).json({ error: "Email já registrado.", success: false });
             }
 
-            user = await User.findOne({ username: params.username });
-            if (user) {
-                return response.status(400).json({ error: "Nome de usuário já registrado.", success: false });
-            }
-
             const password = await bcrypt.hash(params.password, Number.parseInt(process.env.SALT));
             user = new User({
                 name: params.name,
-                username: params.username,
                 email: params.email,
                 password,
             });

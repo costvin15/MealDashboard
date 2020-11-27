@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom'
 import {ThemeProvider, createMuiTheme} from '@material-ui/core'
 import {Helmet} from 'react-helmet'
@@ -11,14 +11,8 @@ import {Helmet} from 'react-helmet'
 import i18n from './lang'
 import {
   Auth,
-  Armas,
-  Pontos,
-  Guardas,
-  Viaturas,
+  Meals,
   Dashboard,
-  Equipamentos,
-  BoletimSimplificado,
-  BoletimDeOcorrencia,
 } from './pages'
 import {user} from './helpers'
 
@@ -55,15 +49,8 @@ const App = () => {
       <Router>
         <Switch>
           <Route path='/auth' component={Auth} />
+          <Route path='/meals/:id' component={Meals} />
           <ProtectedRoute exact path='/' component={Dashboard} />
-          <ProtectedRoute path='/guns' component={Armas} />
-          <ProtectedRoute path='/keepers' component={Guardas} />
-          <ProtectedRoute path='/toclockin' component={Pontos} />
-          <ProtectedRoute path='/vehicles' component={Viaturas} />
-          <ProtectedRoute path='/equipments' component={Equipamentos} />
-          <ProtectedRoute path='/occurrencereport' component={BoletimDeOcorrencia} />
-          <ProtectedRoute path='/simplifiedbulletin' component={BoletimSimplificado} />
-          <ProtectedRoute component={Dashboard} />
         </Switch>
       </Router>
     </ThemeProvider>

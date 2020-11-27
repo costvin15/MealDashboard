@@ -21,8 +21,8 @@ const Signup = ({history}) => {
   const performSignUp = () => {
     (async () => {
       try {
-        if (email && password) {
-          await Provider.performLogin({email, password})
+        if (fullname && email && password) {
+          await Provider.performSignUp({name: fullname, email, password})
           history.replace('/')
         } else {
           setError(true)

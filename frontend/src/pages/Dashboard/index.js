@@ -1,103 +1,52 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {
   makeStyles,
+  CircularProgress,
 } from '@material-ui/core'
 
 import i18n from '../../lang'
-import {user} from '../../helpers'
+import {Provider} from './provider'
 import {Page} from '../../components'
 import {
-  ArmasBlock,
-  GuardasBlock,
-  // ViaturasBlock,
-  EquipamentosBlock,
-  RegistroDePontosBlock,
-  BoletimSimplificadoBlock,
-  BoletimDeOcorrenciaBlock,
+  Category,
+  Categories,
 } from './components'
 
 const useStyles = makeStyles((theme) => ({
-  card: {
+  loadingContainer: {
     width: '100%',
-    marginBottom: theme.spacing(3),
-  },
-  errorWrapper: {
     display: 'flex',
-    alignItems: 'center',
+    alignContent: 'center',
     justifyContent: 'center',
-  },
-  errorContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column',
-    maxWidth: 400,
-    width: '100%',
   },
 }))
 
 const Dashboard = () => {
   const classes = useStyles()
-  const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true)
+        const {categories : data} = await Provider.getCategories()
+        setCategories(data)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    })()
+  }, [])
 
   return (
-    <Page title={`${i18n.t('hello')} ${user.getInfo().nome}`}>
-      {(error && (
-        <div className={classes.errorWrapper}>
-          <div className={classes.errorContainer}>
-            <p>Hello, World!</p>
-          </div>
-        </div>
+    <Page title={`${i18n.t('hello')}`}>
+      {(!loading && (
+        <Categories categories={categories} renderItem={({id}) => <Category id={id} />} />
       )) || (
-        <div className='row'>
-          <div className='col-12 col-md-3'>
-            <div className={classes.card}>
-              <GuardasBlock onError={() => {
-                setError(true)
-              }} />
-            </div>
-          </div>
-          <div className='col-12 col-md-3'>
-            <div className={classes.card}>
-              <RegistroDePontosBlock onError={() => {
-                setError(true)
-              }} />
-            </div>
-          </div>
-          <div className='col-12 col-md-3'>
-            <div className={classes.card}>
-              <BoletimSimplificadoBlock onError={() => {
-                setError(true)
-              }} />
-            </div>
-          </div>
-          <div className='col-12 col-md-3'>
-            <div className={classes.card}>
-              <BoletimDeOcorrenciaBlock onError={() => {
-                setError(true)
-              }} />
-            </div>
-          </div>
-          <div className='col-12 col-md-3'>
-            <div className={classes.card}>
-              <ArmasBlock onError={() => {
-                setError(true)
-              }} />
-            </div>
-          </div>
-          {/* <div className='col-12 col-md-3'>
-            <div className={classes.card}>
-              <ViaturasBlock onError={() => {
-                setError(true)
-              }} />
-            </div>
-          </div> */}
-          <div className='col-12 col-md-3'>
-            <div className={classes.card}>
-              <EquipamentosBlock onError={() => {
-                setError(true)
-              }} />
-            </div>
-          </div>
+        <div className={classes.loadingContainer}>
+          <CircularProgress />
         </div>
       )}
     </Page>

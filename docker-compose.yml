@@ -1,15 +1,15 @@
 version: "3"
 services:
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: frontend
-    # restart: always
-    expose:
-      - "80"
-    ports:
-      - 5002:80
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: frontend
+  #   # restart: always
+  #   expose:
+  #     - "80"
+  #   ports:
+  #     - 5002:80
   backend:
     build:
       context: ./backend
@@ -21,10 +21,10 @@ services:
     ports:
       - 5001:80
     environment:
-        PORT: 80
-        MONGOURL: mongodb://mongo/mealdashboard
-        SALT: 10
-        PRIVATEKEY: privatekey
+      PORT: 80
+      MONGOURL: mongodb://mongo/mealdashboard
+      SALT: 10
+      PRIVATEKEY: privatekey
   mongo:
     image: mongo
     container_name: mongodb
