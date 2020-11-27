@@ -61,7 +61,7 @@ const Meals = () => {
         setLoading(false)
       }
     })()
-  }, [])
+  }, [params])
 
   return (
     <Page title='Receita'>
