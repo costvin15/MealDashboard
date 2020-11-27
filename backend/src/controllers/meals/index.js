@@ -14,6 +14,12 @@ const meals = {
     const result = await data.json()
     response.json(result)
   },
+  details: async (request, response) => {
+    const {id} = request.params
+    const data = await fetch(`${base}/lookup.php?i=${id}`)
+    const result = await data.json()
+    response.json(result)
+  }
 }
 
 export default meals
