@@ -8,18 +8,17 @@ const meals = {
     const result = await data.json()
     response.json(result)
   },
-  all: async (request, response) => {
-    try {
-      const {categories} = await (await fetch(`${base}/categories.php`)).json()
-      
-      categories.map(({strCategory}) => {
-        console.log(strCategory)
-      })
-      
-      response.json({true: true})
-    } catch (error) {
-      console.error(error)
-    }
+  category: async (request, response) => {
+    const {id} = request.params
+    const data = await fetch(`${base}/filter.php?c=${id}`)
+    const result = await data.json()
+    response.json(result)
+  },
+  details: async (request, response) => {
+    const {id} = request.params
+    const data = await fetch(`${base}/lookup.php?i=${id}`)
+    const result = await data.json()
+    response.json(result)
   }
 }
 
