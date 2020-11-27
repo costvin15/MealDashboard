@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
+  Redirect,
 } from 'react-router-dom'
 import {ThemeProvider, createMuiTheme} from '@material-ui/core'
 import {Helmet} from 'react-helmet'
@@ -11,6 +11,7 @@ import {Helmet} from 'react-helmet'
 import i18n from './lang'
 import {
   Auth,
+  Meals,
   Dashboard,
 } from './pages'
 import {user} from './helpers'
@@ -48,6 +49,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route path='/auth' component={Auth} />
+          <Route path='/meals/:id' component={Meals} />
           <ProtectedRoute exact path='/' component={Dashboard} />
         </Switch>
       </Router>
