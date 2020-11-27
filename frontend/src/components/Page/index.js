@@ -53,31 +53,6 @@ const Page = ({history, title = '', children = <></>}) => {
       icon: HomeIcon,
       path: '/',
     },
-    {
-      title: 'keepers',
-      icon: GroupIcon,
-      path: '/keepers'
-    },
-    {
-      title: 'timerecord',
-      icon: TimelineIcon,
-      path: '/toclockin',
-    },
-    {
-      title: 'simplifiedbulletin',
-      icon: AssignmentIcon,
-      path: '/simplifiedbulletin',
-    },
-    {
-      title: 'occurrencereport',
-      icon: AssignmentIcon,
-      path: '/occurrencereport',
-    },
-    {
-      title: 'guns',
-      icon: SecurityIcon,
-      path: '/guns',
-    },
   ]
 
   return (
