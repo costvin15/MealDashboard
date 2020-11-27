@@ -45,7 +45,6 @@ routes.get("/", Home.home)
 
 routes.post("/auth/login", Auth.login)
 routes.post("/auth/register", Auth.register)
-routes.get("/meals/all", Meals.all)
 routes.get("/meals/categories", Meals.categories)
 routes.get("/meals/category/:id", Meals.category)
 
