@@ -16,6 +16,7 @@ import {
 } from '@material-ui/icons'
 import {useParams} from 'react-router-dom'
 
+import {Provider} from './provider'
 import {Page} from '../../components'
 
 const useClasses = makeStyles((theme) => ({
@@ -36,6 +37,18 @@ const useClasses = makeStyles((theme) => ({
 const Meals = () => {
   const params = useParams()
   const classes = useClasses()
+  const [details, setDetails] = useState({})
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await Provider.getDetails(params.id)
+        setDetails(data)
+      } catch (error) {
+        console.error(error)
+      }
+    })()
+  }, [])
 
   return (
     <Page title='Receita'>
@@ -43,11 +56,11 @@ const Meals = () => {
         <Grid className={classes.leftSection} item xs={4}>
           <Card>
             <CardHeader
-              title='Beef and Mustard Pie'
-              subheader='British' />
+              title={details?.strMeal}
+              subheader={details?.strArea} />
             <CardMedia
               className={classes.cardMedia}
-              image='https:\/\/www.themealdb.com\/images\/media\/meals\/sytuqu1511553755.jpg' />
+              image={details?.strMealThumb} />
             <CardContent>
               <Typography>Beef (1kg)</Typography>
               <Typography>Beef (1kg)</Typography>
