@@ -46,11 +46,11 @@ const Category = ({id}) => {
         setLoading(false)
       }
     })()
-  }, [])
+  }, [id])
 
   return (
     <>
-      {!loading && (
+      {(!loading && (
         <List className={classes.list} component='nav'>
           {category.map((meal, index) => (
             <ListItem button onClick={() => history.push(`/meals/${meal.idMeal}`)}>
@@ -58,7 +58,7 @@ const Category = ({id}) => {
             </ListItem>
           ))}
         </List>
-      ) || (
+      )) || (
         <div className={classes.loadingContainer}>
           <CircularProgress variant='indeterminate' />
         </div>

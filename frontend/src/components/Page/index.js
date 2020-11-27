@@ -1,24 +1,17 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {
   makeStyles,
   Container,
   Typography,
   Drawer,
-  Avatar,
-  Divider,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
-  ListItemAvatar,
 } from '@material-ui/core'
 import {
   Home as HomeIcon,
-  Group as GroupIcon,
-  Timeline as TimelineIcon,
-  Assignment as AssignmentIcon,
   ExitToApp as ExitToAppIcon,
-  Security as SecurityIcon,
 } from '@material-ui/icons'
 import {
   withRouter
